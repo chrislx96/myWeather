@@ -1,8 +1,8 @@
 import React from "react";
 import WeatherElement from "./Components/WeatherElement.jsx";
-import style from "./CurrentWeatherInfo.scss";
+import style from "./currentWeather.scss";
 
-class CurrentWeatherInfo extends React.Component {
+class CurrentWeather extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -63,4 +63,4 @@ class CurrentWeatherInfo extends React.Component {
   }
 }
 
-export default CurrentWeatherInfo;
+export default CurrentWeather;

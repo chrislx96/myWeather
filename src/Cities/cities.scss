@@ -1,5 +1,5 @@
 @media (max-width: 1000px) {
-  .otherCities {
+  .cities {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -15,7 +15,7 @@
 }
 
 @media (min-width: 1000px) {
-  .otherCities {
+  .cities {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;

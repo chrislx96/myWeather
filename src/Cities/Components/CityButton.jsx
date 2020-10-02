@@ -1,13 +1,12 @@
 import React from "react";
-import style from "./button.scss";
+import style from "./cityButton.scss";
 
-class OtherCityButton extends React.Component {
+class CityButton extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    console.log("style:" + style.mybutton);
     const { children, onClick } = this.props;
     return (
       <>
@@ -19,4 +18,4 @@ class OtherCityButton extends React.Component {
   }
 }
 
-export default OtherCityButton;
+export default CityButton;

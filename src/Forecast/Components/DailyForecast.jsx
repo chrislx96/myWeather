@@ -1,7 +1,7 @@
 import React from "react";
-import style from "./oneDayForecast.scss";
+import style from "./dailyForecast.scss";
 
-class OneDayForecast extends React.Component {
+class DailyForecast extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -9,7 +9,7 @@ class OneDayForecast extends React.Component {
   render() {
     const { children, dayForecast } = this.props;
     return (
-      <div className={style.oneDayForecast}>
+      <div className={style.dailyForecast}>
         <h3>{children}</h3>
         <h3>H: {dayForecast.maxTemp}°C</h3>
         <h3>L: {dayForecast.minTemp}°C</h3>
@@ -18,4 +18,4 @@ class OneDayForecast extends React.Component {
   }
 }
 
-export default OneDayForecast;
+export default DailyForecast;

@@ -1,5 +1,5 @@
 @media (max-width: 1000px) {
-  .oneDayForecast {
+  .dailyForecast {
     display: flex;
     flex-direction: column;
     width: 20%;
@@ -10,7 +10,7 @@
 }
 
 @media (min-width: 1000px) {
-  .oneDayForecast {
+  .dailyForecast {
     display: flex;
     flex-direction: column;
     width: 20%;

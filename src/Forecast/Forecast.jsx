@@ -1,8 +1,8 @@
 import React from "react";
-import OneDayForecast from "./Components/OneDayForecast.jsx";
-import style from "./fiveDayForecast.scss";
+import DailyForecast from "./Components/DailyForecast.jsx";
+import style from "./forecast.scss";
 
-class FiveDayForecast extends React.Component {
+class Forecast extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -41,31 +41,27 @@ class FiveDayForecast extends React.Component {
   render() {
     const {
       currentCity,
-      firstDayForecast,
-      secondDayForecast,
-      thirdDayForecast,
-      fourthDayForecast,
-      fifthDayForecast,
+      forecast
     } = this.props;
     return (
       <div className={style.fiveDayForecast}>
         <h1 className={style.forecastHeading}>{currentCity} 5 day forecast</h1>
-        <OneDayForecast dayForecast={firstDayForecast}>Today</OneDayForecast>
-        <OneDayForecast dayForecast={secondDayForecast}>
+        <DailyForecast dayForecast={forecast[0]}>Today</DailyForecast>
+        <DailyForecast dayForecast={forecast[1]}>
           {this.getDayNDaysLater(1)}
-        </OneDayForecast>
-        <OneDayForecast dayForecast={thirdDayForecast}>
+        </DailyForecast>
+        <DailyForecast dayForecast={forecast[2]}>
           {this.getDayNDaysLater(2)}
-        </OneDayForecast>
-        <OneDayForecast dayForecast={fourthDayForecast}>
+        </DailyForecast>
+        <DailyForecast dayForecast={forecast[3]}>
           {this.getDayNDaysLater(3)}
-        </OneDayForecast>
-        <OneDayForecast dayForecast={fifthDayForecast}>
+        </DailyForecast>
+        <DailyForecast dayForecast={forecast[4]}>
           {this.getDayNDaysLater(4)}
-        </OneDayForecast>
+        </DailyForecast>
       </div>
     );
   }
 }
 
-export default FiveDayForecast;
+export default Forecast;
