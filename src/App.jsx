@@ -4,46 +4,27 @@ import Cities from "./Cities/Cities.jsx";
 import Forecast from "./Forecast/Forecast.jsx";
 import style from "./app.scss";
 import config from "../config.js";
+const DEFAULT_CITY = "Melbourne";
 const DEFAULT_LAT = "-37.8136";
 const DEFAULT_LON = "144.9631";
+const FORECAST_DAY_NUMBER = 5;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentCity: "Melbourne",
+      currentCity: DEFAULT_CITY,
       currentTemp: "",
       currentWeatherDescrition: "",
       currentHumidity: "",
       currentWindSpeed: "",
-      forecast: [
-        {
-          maxTemp: "High 1",
-          minTemp: "Low 1",
-        },
-        {
-          maxTemp: "High 2",
-          minTemp: "Low 2",
-        },
-        {
-          maxTemp: "High 3",
-          minTemp: "Low 3",
-        },
-        {
-          maxTemp: "High 4",
-          minTemp: "Low 4",
-        },
-        {
-          maxTemp: "High 5",
-          minTemp: "Low 5",
-        },
-      ],
+      forecast: [],
     };
     this.changeCity = this.changeCity.bind(this);
   }
 
   componentDidMount() {
-    // this.fetchWeather(DEFAULT_LAT, DEFAULT_LON);
+    this.fetchWeather(DEFAULT_LAT, DEFAULT_LON);
   }
 
   changeCity(clickedCity, lat, lon) {
@@ -52,11 +33,11 @@ class App extends React.Component {
       this.setState({
         currentCity: clickedCity,
       });
-      // this.fetchWeather(lat, lon);
+      this.fetchWeather(lat, lon);
     };
   }
 
-  async fetchWeather(lat, lon){
+  async fetchWeather(lat, lon) {
     const apiKey = config.weatherApiKey;
     const reponse = await fetch(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=${apiKey}`
@@ -67,46 +48,32 @@ class App extends React.Component {
   }
 
   setCurrentWeather(weatherInfo) {
-    
-    console.log(weatherInfo);
+    const {temp, humidity, wind_speed, weather} = weatherInfo.current
     this.setState({
-      currentTemp: this.toCelcius(weatherInfo.current.temp).toFixed(1),
-      currentWeatherDescrition: weatherInfo.current.weather[0].main,
-      currentHumidity: weatherInfo.current.humidity,
-      currentWindSpeed: this.toKmPerHour(weatherInfo.current.wind_speed),
+      currentTemp: this.toCelcius(temp),
+      currentWeatherDescrition: weather[0].main,
+      currentHumidity: humidity,
+      currentWindSpeed: this.toKmPerHour(wind_speed),
     });
   }
 
   setForecast(weatherInfo) {
-    this.setState({
+    const forecast = weatherInfo.daily;
+    const forecastArray = new Array(FORECAST_DAY_NUMBER);
+    forecast.forEach((dailyForecast, i) => {
+      forecastArray[i] = {
+        maxTemp: this.toCelcius(dailyForecast.temp.max),
+        minTemp: this.toCelcius(dailyForecast.temp.min),
+      };
+    });
 
-      forecast: [
-        {
-          maxTemp: this.toCelcius(weatherInfo.daily[0].temp.max).toFixed(1),
-          minTemp: this.toCelcius(weatherInfo.daily[0].temp.min).toFixed(1),
-        },
-        {
-          maxTemp: this.toCelcius(weatherInfo.daily[1].temp.max).toFixed(1),
-          minTemp: this.toCelcius(weatherInfo.daily[1].temp.min).toFixed(1),
-        },
-        {
-          maxTemp: this.toCelcius(weatherInfo.daily[2].temp.max).toFixed(1),
-          minTemp: this.toCelcius(weatherInfo.daily[2].temp.min).toFixed(1),
-        },
-        {
-          maxTemp: this.toCelcius(weatherInfo.daily[3].temp.max).toFixed(1),
-          minTemp: this.toCelcius(weatherInfo.daily[3].temp.min).toFixed(1),
-        },
-        {
-          maxTemp: this.toCelcius(weatherInfo.daily[4].temp.max).toFixed(1),
-          minTemp: this.toCelcius(weatherInfo.daily[4].temp.min).toFixed(1),
-        },
-      ]
+    this.setState({
+      forecast: forecastArray,
     });
   }
 
   toCelcius(inputTemp) {
-    return inputTemp - 273.15;
+    return (inputTemp - 273.15).toFixed(1);
   }
 
   toKmPerHour(inputSpeed) {
@@ -120,34 +87,30 @@ class App extends React.Component {
       currentWeatherDescrition,
       currentHumidity,
       currentWindSpeed,
-      forecast
+      forecast,
     } = this.state;
     return (
       <div className={style.background}>
         <main className={style.container}>
           <CurrentWeather
             className={style.currentWeather}
-            currentTemp={currentTemp}
-            currentCity={currentCity}
-            currentWeatherDescrition={currentWeatherDescrition}
-            currentHumidity={currentHumidity}
-            currentWindSpeed={currentWindSpeed}
+            temp={currentTemp}
+            city={currentCity}
+            weatherDescrition={currentWeatherDescrition}
+            humidity={currentHumidity}
+            windSpeed={currentWindSpeed}
           />
           <div className={style.cityAndForecast}>
             <Cities
               currentCity={currentCity}
               onCityButtonClick={this.changeCity}
             />
-            <Forecast
-              currentCity={currentCity}
-              forecast={forecast}
-            />
+            <Forecast currentCity={currentCity} forecast={forecast} />
           </div>
         </main>
       </div>
     );
   }
 }
-
 
 export default App;
