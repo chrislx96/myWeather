@@ -37,8 +37,8 @@ class Forecast extends React.Component {
   render() {
     const { currentCity, forecast } = this.props;
     return (
-      <div className={style.fiveDayForecast}>
-        <h1 className={style.forecastHeading}>{currentCity} 5 day forecast</h1>
+      <div className={style.forecast}>
+        <h2 className={style.forecastHeading}>{currentCity} Forecast</h2>
         {forecast.map((dailyForecast, i) => {
           return (
             <DailyForecast key={i} dayForecast={dailyForecast}>

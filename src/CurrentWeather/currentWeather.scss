@@ -6,6 +6,8 @@
     flex-direction: column-reverse;
     width: 100%;
     height: 50%;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
 
     .weatherElements {
       width: 100%;
@@ -42,6 +44,7 @@
       font-size: 2rem;
       padding-top: 1rem;
       padding-bottom: 1rem;
+      
       .city {
         position: relative;
         top: 30%;
@@ -77,6 +80,8 @@
     justify-content: center;
     width: 100%;
     height: 50%;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
 
     .weatherElements {
       width: 50%;
@@ -142,4 +147,32 @@
       }
     }
   }
+}
+
+.melbourne{
+  background-image: url("./assets/img/Melbourne.jpg");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+.sydney{
+  background-image: url("./assets/img/Sydney.jpg");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+.brisbane{
+  background-image: url("./assets/img/Brisbane.jpg");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+.perth{
+  background-image: url("./assets/img/Perth.jpg");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
 }

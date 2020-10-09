@@ -1,5 +1,5 @@
 @media (max-width: 1000px) {
-  .fiveDayForecast {
+  .forecast {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -17,7 +17,7 @@
 }
 
 @media (min-width: 1000px) {
-  .fiveDayForecast {
+  .forecast {
     display: flex;
     flex-wrap: wrap;
     width: 60%;
@@ -25,7 +25,6 @@
 
   .forecastHeading {
     width: 100%;
-    height: 20%;
     text-align: center;
     margin: 0;
   }

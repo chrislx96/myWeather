@@ -23,9 +23,11 @@ class CurrentWeather extends React.Component {
   }
 
   render() {
-    const { city, temp, weatherDescrition, humidity, windSpeed } = this.props;
+    const { currentCity, currentCityInfo :{ temp, weatherDescrition, humidity, windSpeed} } = this.props;
+    const cityInLowerCase = currentCity.toLowerCase();
+
     return (
-      <div className={style.currentWeather}>
+      <div className={`${style.currentWeather} ${style[cityInLowerCase]}`}>
         <div className={style.weatherElements}>
           <WeatherElement elementStyle={style.temperature}>
             {temp}°C
@@ -39,7 +41,7 @@ class CurrentWeather extends React.Component {
           </div>
         </div>
         <div className={style.currentCity}>
-          <div className={style.city}>{city}</div>
+          <div className={style.city}>{currentCity}</div>
           <div className={style.day}>{this.getDayOfToday()}</div>
         </div>
       </div>
